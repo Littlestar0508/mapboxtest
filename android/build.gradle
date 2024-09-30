@@ -16,6 +16,18 @@ buildscript {
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
     }
+
+    allprojects {
+    repositories {
+        maven {
+            url = uri("https://api.mapbox.com/downloads/v2/releases/maven")
+            credentials.username = "mapbox"
+            credentials.password = providers.gradleProperty("MAPBOX_DOWNLOADS_TOKEN").get()
+            authentication { basic(BasicAuthentication) }
+        }
+
+    }
+}
 }
 
 apply plugin: "com.facebook.react.rootproject"
